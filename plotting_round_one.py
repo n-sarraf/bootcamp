@@ -34,7 +34,7 @@ _ = plt.hist(xa_high, normed=True, bins=bins, histtype='stepfilled', alpha=0.5)
 plt.xlabel('Cross-sectional area (µms$^2$)')
 plt.ylabel('frequency')
 plt.legend(('low concentration', 'high concentration'), loc='upper right')
-plt.show()
 
 # Save the figure
-plt.savefig('egg_area_histograms.svg', bbox_inches='tight')
+plt.savefig('egg_area_histograms.pdf', bbox_inches='tight')
+plot.show()
