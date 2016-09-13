@@ -11,3 +11,17 @@ def xa_to_diameter(xa):
     # Compute diameter from areas
     # A = pi * d^2 / 4
     diameter = np.sqrt(xa *4 / np.pi)
+
+    return diameter
+
+
+def easy_reshape(obj, ncols, order='C'):
+    '''
+    Guarantee that reshaping works by defining only one shape parameter.
+    '''
+
+    # Reshape
+
+    arr = np.reshape(obj, (ncols, len(obj)/ncols, len(obj)/ncols, len(obj)/ncols))
+
+    return arr
