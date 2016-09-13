@@ -24,10 +24,10 @@ gfp = data_txt[:,1]
 # plt.show()
 
 # Plot ipgt vs gfp
-plt.semilogy(iptg, gfp, linestyle='none', marker='.', markersize=20)
+plt.loglog(iptg, gfp, linestyle='none', marker='.', markersize=20)
 plt.xlabel('IPTG (mM)')
 plt.ylabel('Normalized GFP')
-plt.title('IPTG Titration - semilogy')
+plt.title('IPTG Titration - Log-log')
 plt.ylim(-0.02, 1.02)
 plt.xlim(8e-4, 15)
 plt.show()
