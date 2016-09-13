@@ -28,8 +28,28 @@ def gc_blocks(seq, block_size):
         gc_count=0
 
     gc_tuple = tuple(gc_list)
-    print(seq_list)
-    return gc_tuple
+
+    return gc_tuple, seq_list
 
 
-def mapped_seq = gc_map(seq, block_size, gc_thresh):
+def gc_map(seq, block_size, gc_thresh):
+
+    gc_tuple, seq_list = gc_blocks(seq, block_size)
+    gc_above = []
+    map_seq = ''
+
+    for i, base in enumerate(gc_tuple):
+        if gc_tuple[i]>gc_thresh:
+            gc_above.append(True)
+        else:
+            gc_above.append(False)
+
+    for i, base in enumerate(seq_list):
+        if gc_above[i] == True:
+            up = str(seq_list[i]).upper()
+            map_seq += up
+        else:
+            low = str(seq_list[i]).lower()
+            map_seq += low
+
+    return map_seq
