@@ -18,4 +18,6 @@ gfp = data_txt[:,1]
 plt.semilogx(iptg, gfp, linestyle='none', marker='.', markersize=20)
 plt.xlabel('IPTG (mM)')
 plt.ylabel('Normalized GFP')
+plt.ylim(-0.02, 1.02)
+plt.xlim(8e-4, 15)
 plt.show()
