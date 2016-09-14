@@ -68,3 +68,25 @@ plt.ylabel('Fold change')
 plt.title('IPTG Titration')
 plt.legend(('WT', 'Q18M', 'Q18A', 'Th WT', 'Th Q18M', 'Th Q18A'), loc='upper left')
 plt.show()
+
+
+def bohr_parameter(c, RK, KdA=0.017, KdI=0.002, Kswitch=5.8):
+    '''
+    Calculate Bohr parameter.
+    '''
+
+    num = (1 + c/KdA)**2
+    denom = (1 + c/KdA)**2 + Kswitch*(1+c/KdI)**2
+    fc = -np.log(RK)-log(num/denom)
+
+    return fc
+
+
+def fold_change_bohr(bohr_parameter):
+    '''
+    Calculate fold change as a function of the Bohr parameter.
+    '''
+
+    fc = 1/(1+np.exp(-bohr_parameter))
+
+    return fc
