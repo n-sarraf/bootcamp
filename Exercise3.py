@@ -51,12 +51,13 @@ c_wt = np.logspace(1e-6, 15, 500)
 c_q18m = np.logspace(1e-6, 15, 500)
 c_q18a = np.logspace(1e-6, 15, 500)
 
-plt.close()
-
-# Plot theoretical and real data on same plot
+# Calculate theoretical fold change
 wt_tfc = fold_change(c_wt, 141.5)
 q18m_tfc = fold_change(c_q18m, 1332)
 q18a_tfc = fold_change(c_q18a, 16.56)
+
+# Plot theoretical and real data on same plot
+plt.close()
 plt.semilogx(wt_iptg, wt_fc, linestyle='none', marker='.', markersize=20)
 plt.semilogx(q18m_iptg, q18m_fc, linestyle='none', marker='.', markersize=20)
 plt.semilogx(q18a_iptg, q18a_fc, linestyle='none', marker='.', markersize=20)
@@ -98,10 +99,12 @@ bohr_array = np.linspace(-6, 6, 500)
 # Plot theoretical fold change based on bohr_array
 plt.plot(bohr_array, fold_change_bohr(bohr_array), 'gray')
 
-# Plot experimental fold change vs Bohr parameter
+# Calculate Bohr parameter from experimental data
 wt_bohr = bohr_parameter(wt_iptg, 141.5)
 q18m_bohr = bohr_parameter(q18m_iptg, 1332)
 q18a_bohr = bohr_parameter(q18a_iptg, 16.56)
+
+# Plot experimental fold change vs Bohr parameter
 plt.plot(wt_bohr, wt_fc, 'r', marker='.', linestyle='none')
 plt.plot(q18m_bohr, q18m_fc, 'g--')
 plt.plot(q18a_bohr, q18a_fc, 'b:')
