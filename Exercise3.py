@@ -77,7 +77,7 @@ def bohr_parameter(c, RK, KdA=0.017, KdI=0.002, Kswitch=5.8):
 
     num = (1 + c/KdA)**2
     denom = (1 + c/KdA)**2 + Kswitch*(1+c/KdI)**2
-    fc = -np.log(RK)-log(num/denom)
+    fc = -np.log(RK)-np.log(num/denom)
 
     return fc
 
@@ -90,3 +90,23 @@ def fold_change_bohr(bohr_parameter):
     fc = 1/(1+np.exp(-bohr_parameter))
 
     return fc
+
+# Exercise 3.2 e3-4
+plt.close()
+bohr_array = np.linspace(-6, 6, 500)
+
+# Plot theoretical fold change based on bohr_array
+plt.plot(bohr_array, fold_change_bohr(bohr_array), 'gray')
+
+# Plot experimental fold change vs Bohr parameter
+wt_bohr = bohr_parameter(wt_iptg, 141.5)
+q18m_bohr = bohr_parameter(q18m_iptg, 1332)
+q18a_bohr = bohr_parameter(q18a_iptg, 16.56)
+plt.plot(wt_bohr, wt_fc, 'r', marker='.', linestyle='none')
+plt.plot(q18m_bohr, q18m_fc, 'g--')
+plt.plot(q18a_bohr, q18a_fc, 'b:')
+plt.xlabel('Bohr parameter')
+plt.ylabel('Fold change')
+plt.title('Data Collapse!!!!')
+plt.legend(('Universal', 'WT', 'Q18M', 'Q18A'), loc='upper left')
+plt.show()
