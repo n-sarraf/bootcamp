@@ -47,3 +47,23 @@ plt.imshow(seg, cmap=plt.cm.Greys_r)
 seg_lab, num_cells = skimage.measure.label(seg, return_num=True, background=0)
 plt.close()
 plt.imshow(seg_lab, cmap=plt.cm.Spectral_r)
+
+# Compute the region properties and extract area of each object.
+ip_dist = 0.063 # µm per pixel
+props = skimage.measure.regionprops(seg_lab)
+
+# Get the areas as an array.
+areas = np.array([prop.area for prop in props])
+cutoff = 300
+
+im_cells = np.copy(seg_lab) > 0
+for i, _ in enumerate(areas):
+    if areas[i]<cutoff:
+        im_cells[seg_lab==props[i].label] = 0 # where area < cutoff, index into
+                                              # seg_label to blank out
+                                              # corresponding objects
+
+area_filt_lab = skimage.measure.label(im_cells)
+
+plt.figure()
+plt.imshow(area_filt_lab, cmap=plt.cm.Spectral_r)
