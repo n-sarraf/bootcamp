@@ -42,10 +42,10 @@ def bd_bl_data(data, year_number):
     Slice out beak depth and beak length data for both species for a given year.
     '''
 
-    bd_f_data = data.loc[(data['year'] == year_number) & (data['species'] == 'fortis'), ['beak depth (mm)']]
-    bl_f_data = data.loc[(data['year'] == year_number) & (data['species'] == 'fortis'), ['beak length (mm)']]
-    bd_s_data = data.loc[(data['year'] == year_number) & (data['species'] == 'scandens'), ['beak depth (mm)']]
-    bl_s_data = data.loc[(data['year'] == year_number) & (data['species'] == 'scandens'), ['beak length (mm)']]
+    bd_f_data = data.loc[(data['year'] == year_number) & (data['species'] == 'fortis'), 'beak depth (mm)']
+    bl_f_data = data.loc[(data['year'] == year_number) & (data['species'] == 'fortis'), 'beak length (mm)']
+    bd_s_data = data.loc[(data['year'] == year_number) & (data['species'] == 'scandens'), 'beak depth (mm)']
+    bl_s_data = data.loc[(data['year'] == year_number) & (data['species'] == 'scandens'), 'beak length (mm)']
 
     return bd_f_data, bl_f_data, bd_s_data, bl_s_data
 
@@ -55,8 +55,8 @@ def plot_bd_bl(bd_f_y, bl_f_y, bd_s_y, bl_s_y, year):
     Plot beak depth vs beak length data.
     bd_f_y: beak depth, fortis
     bl_f_y: beak length, fortis
-    bd_s_y: beak depth, scanlens
-    bl_s_y: beak length, scanlens
+    bd_s_y: beak depth, scandens
+    bl_s_y: beak length, scandens
     '''
 
     plt.plot(bd_s_y, bl_s_y, 'r.')
@@ -88,8 +88,8 @@ plt.close()
 
 
 # Plot beak length data as ecdf
-bl_fortis_x, bl_fortis_y = bootcamp_utils.ecdf(bl_fortis_87['beak length (mm)'])
-bl_scandens_x, bl_scandens_y = bootcamp_utils.ecdf(bl_scandens_87['beak length (mm)'])
+bl_fortis_x, bl_fortis_y = bootcamp_utils.ecdf(bl_fortis_87)
+bl_scandens_x, bl_scandens_y = bootcamp_utils.ecdf(bl_scandens_87)
 plt.plot(bl_fortis_x, bl_fortis_y)
 plt.plot(bl_scandens_x, bl_scandens_y)
 plt.legend(['fortis', 'scandens'], loc='lower right')
