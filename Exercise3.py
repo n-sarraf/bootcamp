@@ -46,6 +46,7 @@ def fold_change(c, RK, KdA=.017, KdI=.002, Kswitch=5.8):
 
     return fc
 
+
 # Create set of data for IPTG concentration
 c_wt = np.logspace(1e-6, 15, 500)
 c_q18m = np.logspace(1e-6, 15, 500)
@@ -92,6 +93,7 @@ def fold_change_bohr(bohr_parameter):
 
     return fc
 
+
 # Exercise 3.2 e3-4
 plt.close()
 bohr_array = np.linspace(-6, 6, 500)
@@ -110,6 +112,8 @@ plt.plot(q18m_bohr, q18m_fc, 'g--')
 plt.plot(q18a_bohr, q18a_fc, 'b:')
 plt.xlabel('Bohr parameter')
 plt.ylabel('Fold change')
-plt.title('Data Collapse!!!!')
+plt.title('Data Collapse')
 plt.legend(('Universal', 'WT', 'Q18M', 'Q18A'), loc='upper left')
 plt.show()
+plt.savefig('data_collapse.pdf', bbox_inches='tight')
+plt.savefig('data_collapse.svg', bbox_inches='tight')
