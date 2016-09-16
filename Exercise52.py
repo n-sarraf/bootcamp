@@ -67,10 +67,10 @@ for i in range(0,8):
     plt.imshow(fitc_otsu[i], cmap=plt.cm.Greys_r)
     plt.title('Extracted F ' + str(i+1))
 
-    # plt.subplot(236)
-    # fitc_hist[i], fitc_bins[i] = skimage.exposure.histogram(fitc_otsu[i])
-    # plt.plot(fitc_bins[i], fitc_hist[i])
-    # plt.xlabel('pixel value')
-    # plt.ylabel('counts')
+    plt.subplot(236)
+    fitc_hist[i], fitc_bins[i] = skimage.exposure.histogram(im_fitc[i])
+    plt.plot(fitc_bins[i], fitc_hist[i])
+    plt.xlabel('pixel value')
+    plt.ylabel('counts')
 
     plt.show()
