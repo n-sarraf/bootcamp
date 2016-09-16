@@ -59,9 +59,10 @@ cutoff = 300
 im_cells = np.copy(seg_lab) > 0
 for i, _ in enumerate(areas):
     if areas[i]<cutoff:
-        im_cells[seg_lab==props[i].label] = 0 # where area < cutoff, index into
-                                              # seg_label to blank out
-                                              # corresponding objects
+        im_cells[seg_lab==props[i].label] = 0 # for objects in which
+                                              # area < cutoff, index into
+                                              # seg_label to find and blank out
+                                              # labeled objects
 
 area_filt_lab = skimage.measure.label(im_cells)
 
