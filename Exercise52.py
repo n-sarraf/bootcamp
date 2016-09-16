@@ -19,6 +19,9 @@ im_blur = [1,]*8
 phase_float = [1,]*8
 phase_sub = [1,]*8
 seg_im = [1,]*8
+fitc_otsu = [1,]*8
+fitc_hist = [1,]*8
+fitc_bins = [1,]*8
 
 # Load data
 for i in range(0,8):
@@ -33,16 +36,41 @@ for i in range(0,8):
     phase_float[i] = skimage.img_as_float(im_phase[i])
     phase_sub[i] = phase_float[i] - im_blur[i]
 
-    # Perform segmentation on image files.
+    # Perform segmentation on phase image files.
     thresh = skimage.filters.threshold_otsu(phase_sub[i])
     seg_im[i] = phase_sub[i] < thresh
 
-    # Plot our segmentation.
-    fig, ax = plt.subplots(1, 3)
-    ax[0].imshow(im_phase[i], cmap=plt.cm.viridis)
-    ax[1].imshow(phase_sub[i], cmap=plt.cm.viridis)
-    ax[2].imshow(seg_im[i], cmap=plt.cm.Greys_r)
-    ax[0].set_title('Original ' + str(i+1))
-    ax[1].set_title('Subtracted ' + str(i+1))
-    ax[2].set_title('Segmented ' + str(i+1))
+    # Perform fluorescence extraction on fitc image files.
+    fitc_thresh = skimage.filters.threshold_otsu(im_fitc[i])
+    fitc_otsu[i] = im_fitc[i] > fitc_thresh
+
+    # Plot our segmentation and fluorescence extraction.
+    plt.figure(i)
+
+    plt.subplot(231)
+    plt.imshow(im_phase[i], cmap=plt.cm.viridis)
+    plt.title('Phase ' + str(i+1))
+
+    plt.subplot(232)
+    plt.imshow(phase_sub[i], cmap=plt.cm.viridis)
+    plt.title('Subtracted Ph ' + str(i+1))
+
+    plt.subplot(233)
+    plt.imshow(seg_im[i], cmap=plt.cm.Greys_r)
+    plt.title('Segmented Ph ' + str(i+1))
+
+    plt.subplot(234)
+    plt.imshow(im_fitc[i], cmap=plt.cm.viridis)
+    plt.title('FITC ' + str(i+1))
+
+    plt.subplot(235)
+    plt.imshow(fitc_otsu[i], cmap=plt.cm.Greys_r)
+    plt.title('Extracted F ' + str(i+1))
+
+    # plt.subplot(236)
+    # fitc_hist[i], fitc_bins[i] = skimage.exposure.histogram(fitc_otsu[i])
+    # plt.plot(fitc_bins[i], fitc_hist[i])
+    # plt.xlabel('pixel value')
+    # plt.ylabel('counts')
+
     plt.show()
