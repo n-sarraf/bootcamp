@@ -22,10 +22,13 @@ seg_im = [1,]*8
 fitc_otsu = [1,]*8
 fitc_hist = [1,]*8
 fitc_bins = [1,]*8
+phase_hist = [1,]*8
+phase_bins = [1,]*8
 
-# Load data
 for i in range(0,8):
     j = str(i)
+
+    # Load data
     im_phase[i] = skimage.io.imread('data/HG105_images/noLac_phase_000' + j + '.tif')
     im_fitc[i] = skimage.io.imread('data/HG105_images/noLac_fitc_000' + j + '.tif')
 
@@ -70,6 +73,7 @@ for i in range(0,8):
     plt.subplot(236)
     fitc_hist[i], fitc_bins[i] = skimage.exposure.histogram(im_fitc[i])
     plt.plot(fitc_bins[i], fitc_hist[i])
+    plt.title('Histogram')
     plt.xlabel('pixel value')
     plt.ylabel('counts')
 
